@@ -19,4 +19,3 @@ export const defaultTheme = {
 
   'yellow-500': '#FBA94C',
 }
-
