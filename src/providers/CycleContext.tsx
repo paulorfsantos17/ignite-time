@@ -25,7 +25,7 @@ interface ICycleContextType {
   activeCycleId: string | null
   cycles: ICycle[]
   amountSecondsPassed: number
-  setAmountSecondsPassed: (second: number) => void
+  changeAmountSecondsPassed: (second: number) => void
   markCurrentCycleAsFinished: () => void
   interruptCycle: () => void
   createNewCycle: (data: ICreateCycleData) => void
@@ -74,6 +74,18 @@ export function CyclesContextProvider({
     return 0
   })
 
+  const markCurrentCycleAsFinished = () => {
+    dispatch(markCurrentCycleAsFinishedAction())
+  }
+
+  const markCurrentCycleAsInterrupedDate = () => {
+    dispatch(markCurrentCycleAsInterrupedDateAction())
+  }
+
+  function interruptCycle() {
+    markCurrentCycleAsInterrupedDate()
+  }
+
   function createNewCycle(data: ICreateCycleData) {
     const id = String(new Date().getTime())
     const newCycle: ICycle = {
@@ -86,16 +98,12 @@ export function CyclesContextProvider({
     dispatch(addNewCycleAction(newCycle))
   }
 
-  const markCurrentCycleAsFinished = () => {
-    dispatch(markCurrentCycleAsFinishedAction())
-  }
-
-  const markCurrentCycleAsInterrupedDate = () => {
-    dispatch(markCurrentCycleAsInterrupedDateAction())
-  }
-
-  function interruptCycle() {
-    markCurrentCycleAsInterrupedDate()
+  function changeAmountSecondsPassed(second: number) {
+    if (activeCycleId) {
+      setAmountSecondsPassed(second)
+    } else {
+      return 0
+    }
   }
 
   function resetSetActiveCycle() {
@@ -117,7 +125,7 @@ export function CyclesContextProvider({
         amountSecondsPassed,
         createNewCycle,
         interruptCycle,
-        setAmountSecondsPassed,
+        changeAmountSecondsPassed,
         resetSetActiveCycle,
       }}
     >
