@@ -8,7 +8,7 @@ export function CountDown() {
   const {
     activeCycle,
     activeCycleId,
-    markCurrentCycleAsFininished,
+    markCurrentCycleAsFinished,
     amountSecondsPassed,
     changeAmountSecondsPassed,
     resetSetActiveCycle,
@@ -42,7 +42,7 @@ export function CountDown() {
         const totalSeconds = activeCycle ? activeCycle.minutesAmount * 60 : 0
 
         if (secondsDifference >= totalSeconds) {
-          markCurrentCycleAsFininished()
+          markCurrentCycleAsFinished()
           changeAmountSecondsPassed(totalSeconds)
           clearInterval(interval)
           resetSetActiveCycle()
@@ -55,10 +55,12 @@ export function CountDown() {
     activeCycle,
     totalSeconds,
     activeCycleId,
-    markCurrentCycleAsFininished,
+    markCurrentCycleAsFinished,
     changeAmountSecondsPassed,
     resetSetActiveCycle,
   ])
+
+  useEffect(() => {})
 
   return (
     <CountdownContainer>
