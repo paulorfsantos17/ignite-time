@@ -48,7 +48,6 @@ export function Home() {
 
   function handleInterruptCycle() {
     interruptCycle()
-    
   }
   return (
     <HomeContainer>
